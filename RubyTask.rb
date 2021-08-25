@@ -12,8 +12,7 @@ end
 def read_api
   response = api_manager.fetch_quote
   file_manager.write_to_file response
-  puts response
-  puts
+  puts response.to_s+"\n"
 end
 
 def read_file
@@ -32,14 +31,15 @@ while true
   = "
   input = gets.chomp.to_i
 
-  if input == 1
+  case input
+  when 1
     read_api
-  elsif input == 2
-    read_file
-  elsif input == 3
-    reset_file
-  elsif input == 4
-    break
+  when 2
+      read_file
+  when 3
+      reset_file
+  when 4
+      break
   else
     puts "Invalid Input, Please Try Again."
   end
