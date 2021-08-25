@@ -1,23 +1,27 @@
 require "./Api.rb"
 require "./File.rb"
 
-def readAPi
-  $api = Api.new
-  response = $api.get
-  $file = File.new 0
-  $file.writeToFile response
+def api_manager
+  @api_manager || Api.new
+end
+
+def file_manager
+  @file_manager || File.new(0)
+end
+
+def read_api
+  response = api_manager.fetch_quote
+  file_manager.write_to_file response
   puts response
   puts
 end
 
-def readFile
-  $file = File.new 0
-  $file.readFile
+def read_file
+  file_manager.read_file
 end
 
-def resetFile
-  $file = File.new 0
-  $file.resetFile
+def reset_file
+  file_manager.reset_file
 end
 
 while true
@@ -29,11 +33,11 @@ while true
   input = gets.chomp.to_i
 
   if input == 1
-    readAPi
+    read_api
   elsif input == 2
-    readFile
+    read_file
   elsif input == 3
-    resetFile
+    reset_file
   elsif input == 4
     break
   else
