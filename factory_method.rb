@@ -4,11 +4,6 @@ class Vehicle
   def factory_method
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
-
-  # return [Car]
-  def instance
-    factory_method
-  end
 end
 
 class Vehicle1 < Vehicle
@@ -44,7 +39,7 @@ end
 
 def main(vehicle)
   print 'inside main()'
-  car = vehicle.instance
+  car = vehicle.factory_method
   car.accelerate
 end
 
